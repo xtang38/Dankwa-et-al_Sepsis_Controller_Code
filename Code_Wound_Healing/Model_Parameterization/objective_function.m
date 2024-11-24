@@ -8,9 +8,9 @@ Patho = 20;
 
 tspan = 0:0.01:8;
 options = odeset('RelTol',1e-10,'AbsTol',1e-10);
-x0 = [1 1 .8 .2 .01 .01 Patho 0 0 0];
-[t,y]=ode23s(@(t,x)Injury_Model_New(t,x,p),tspan,x0,options);
 
+x0 = [1 1 .8 .2 Patho 0 0];
+[t,y]=ode23s(@(t,x)Injury_Model_Final_Fitting(t,x,p),tspan,x0,options);
 
 Neutrophil = y(:,1);
 M1 = y(:,3);
@@ -40,8 +40,6 @@ objective = Error_M2 + Error_M1 + Error_N;
 disp(['SSE Objective: ' num2str(objective)])
 %disp(['Updated Parameter: ' num2str(objective)])
 %disp(p)
-save('OptParameter_Nov2nd.mat','p')
-
-
+% % save('Fitted_Parameter.mat','p')
 
 end
